@@ -1,2 +1,6 @@
 ---
 # tracks tasks file for role-rpimusic
+
+- name: TODO - put a sample audio track here
+  fail:
+    msg: "I need to build this piece, failing."

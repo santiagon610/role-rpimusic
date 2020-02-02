@@ -10,5 +10,5 @@
 - name: Install music
   include_tasks: tracks.yml
   when:
-    - installMusic is defined
-    - installMusic|bool
+    - install_music is defined
+    - install_music|bool

@@ -11,7 +11,7 @@ The purpose of this role is to turn a Raspberry Pi with a default load of Raspbi
 
 Runtime vars:
 
-- `installMusic`: boolean. If defined, will install a sample track to the music directory destination node.
+- `install_music`: boolean. If defined, will install a sample track to the music directory destination node.
 
 [Defaulted](defaults/main.yml) vars:
 
