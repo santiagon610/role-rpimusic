@@ -1,0 +1,6 @@
+- name: Install required Apt packages
+  package:
+    name: ["git", "mpd", "mpc"]
+    state: latest
+  become: yes
+  become_user: root

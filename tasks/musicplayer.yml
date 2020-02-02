@@ -1,0 +1,47 @@
+- name: Create music directory
+  file:
+    path: ~/music/
+    state: directory
+
+- name: Create scripts directory
+  file:
+    path: ~/scripts/
+    state: directory
+
+- name: Create logging and runtime directory
+  file:
+    path: ~/services/
+    state: directory
+
+- name: Copy musicStart script
+  copy:
+    src: musicStart.sh
+    dest: ~/scripts/musicStart.sh
+    owner: pi
+    group: pi
+    mode: 0755
+
+- name: Copy musicStop script
+  copy:
+    src: musicStop.sh
+    dest: ~/scripts/musicStop.sh
+    owner: pi
+    group: pi
+    mode: 0755
+
+- name: Copy MPD configuration
+  copy:
+    src: mpd.conf
+    dest: /etc/mpd.conf
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+  become_user: root
+
+- name: Add music start to rc.local
+  lineinfile:
+    dest: /etc/rc.local
+    line: "mpc play"
+  become: yes
+  become_user: root
