@@ -1,6 +1,6 @@
 # Raspberry Pi Music Player
 
-The purpose of this role is to turn a Raspberry Pi with a default load of Raspbian into a music player. My initial use case was to provide on-hold music to my PBX customers, but you can really use it for just about anything.
+The purpose of this role is to turn a Raspberry Pi with a default load of Raspbian into a music player. My initial use case was to provide on-hold music to my PBX customers, but you can really use it for an unattended music player.
 
 ## Requirements
 
@@ -9,7 +9,17 @@ The purpose of this role is to turn a Raspberry Pi with a default load of Raspbi
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Runtime vars:
+
+- `installMusic`: boolean. If defined, will install a sample track to the music directory destination node.
+
+[Defaulted](defaults/main.yml) vars:
+
+- `tracks_directory`: string. Path in which tracks to be played will be located.
+- `scripts_directory`: string. Path in which helper scripts will be placed.
+- `logs_directory`: string. Path in which logs will be generated.
+- `musicplayer_owner`: string. User that will take ownership of the music player service.
+- `musicplayer_group`: string. A group in which `musicplayer_owner` is a member.
 
 ## Example Playbook
 
@@ -27,4 +37,4 @@ Apache 2.0
 
 ## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Nicholas Santiago, HLV Technologies LLC

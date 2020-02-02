@@ -1,33 +1,28 @@
-- name: Create music directory
+---
+- name: Create directory structure
   file:
-    path: ~/music/
+    path: "{{ directory }}"
     state: directory
+    owner: "{{ musicplayer_owner }}"
+    group: "{{ musicplayer_group }}"
+  loop:
+    - "{{ tracks_directory }}"
+    - "{{ scripts_directory }}"
+    - "{{ logs_directory }}"
+  loop_control:
+    loop_var: directory
 
-- name: Create scripts directory
-  file:
-    path: ~/scripts/
-    state: directory
-
-- name: Create logging and runtime directory
-  file:
-    path: ~/services/
-    state: directory
-
-- name: Copy musicStart script
+- name: Copy helper scripts
   copy:
-    src: musicStart.sh
-    dest: ~/scripts/musicStart.sh
-    owner: pi
-    group: pi
-    mode: 0755
-
-- name: Copy musicStop script
-  copy:
-    src: musicStop.sh
-    dest: ~/scripts/musicStop.sh
-    owner: pi
-    group: pi
-    mode: 0755
+    src: "{{ script }}"
+    dest: "{{ scripts_directory }}/{{ script }}"
+    owner: "{{ musicplayer_owner }}"
+    group: "{{ musicplayer_group }}"
+  loop:
+    - musicStop.sh
+    - musicStart.sh
+  loop_control:
+    loop_var: script
 
 - name: Copy MPD configuration
   copy:
@@ -35,7 +30,7 @@
     dest: /etc/mpd.conf
     owner: root
     group: root
-    mode: 0755
+    mode: 0644
   become: yes
   become_user: root
 
@@ -45,3 +40,11 @@
     line: "mpc play"
   become: yes
   become_user: root
+
+- name: Add aliases to bashrc for {{ musicplayer_owner }}
+  blockinfile:
+    block: |
+      alias musicstop="{{ scripts_directory }}/musicStop.sh"
+      alias musicstart="{{ scripts_directory }}/musicStart.sh"
+    state: present
+    path: "/home/{{ musicplayer_owner }}/.bashrc"

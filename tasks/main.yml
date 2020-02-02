@@ -1,2 +1,14 @@
 ---
 # tasks file for role-rpimusic
+
+- name: Install dependencies
+  include_tasks: apt.yml
+
+- name: Install music player
+  include_tasks: musicplayer.yml
+
+- name: Install music
+  include_tasks: tracks.yml
+  when:
+    - installMusic is defined
+    - installMusic|bool

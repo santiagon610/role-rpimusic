@@ -1,2 +1,2 @@
-localhost
-
+[test]
+pi.local  ansible_user="pi"
