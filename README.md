@@ -37,4 +37,4 @@ Apache 2.0
 
 ## Author Information
 
-Nicholas Santiago, HLV Technologies LLC
+Nicholas Santiago, [HLV Technologies LLC](https://www.hlvpa.com)
